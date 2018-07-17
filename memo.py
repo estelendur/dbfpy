@@ -115,11 +115,11 @@ class MemoFile(object):
 
         """
         (_basename, _ext) = os.path.splitext(name)
-        if _ext.upper() in ("", ".DBF"):
+        if _ext.lower() in ("", ".dbf"):
             if isFpt:
-                return _basename + ".FPT"
+                return _basename + ".fpt"
             else:
-                return _basename + ".DBT"
+                return _basename + ".dbt"
         else:
             return name[:-1] + "T"
 
