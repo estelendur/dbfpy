@@ -142,8 +142,11 @@ class Dbf(object):
         if memoFile:
             self.memo = memo.MemoFile(memoFile, readOnly=readOnly, new=new)
         elif self.header.hasMemoField:
-            self.memo = memo.MemoFile(memo.MemoFile.memoFileName(self.name),
-                readOnly=readOnly, new=new)
+            try:
+                self.memo = memo.MemoFile(memo.MemoFile.memoFileName(self.name),
+                    readOnly=readOnly, new=new)
+            except IOError:
+                self.memo = None
         else:
             self.memo = None
         self.header.setMemoFile(self.memo)
