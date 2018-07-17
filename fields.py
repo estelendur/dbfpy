@@ -345,7 +345,10 @@ class DbfMemoFieldDef(DbfFieldDef):
         """Return MemoData instance containing field data."""
         _block = struct.unpack("<10s", value.strip().zfill(10))[0]
         if _block:
-            return self.file.read(_block)
+            try:
+                return self.file.read(_block)
+            except AttributeError:
+                return MemoData("", self.memoType)
         else:
             return MemoData("", self.memoType)
 
