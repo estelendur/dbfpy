@@ -35,7 +35,6 @@ __all__ = ["lookupFor",] # field classes added at the end of the module
 import datetime
 import struct
 import sys
-from pprint import pprint
 
 from memo import MemoData
 import utils
@@ -175,7 +174,6 @@ class DbfFieldDef(object):
 
     def decodeFromRecord(self, record):
         """Return decoded field value from the record string."""
-        pprint(self.rawFromRecord(record))
         try:
             return self.decodeValue(self.rawFromRecord(record))
         except:
@@ -345,8 +343,6 @@ class DbfMemoFieldDef(DbfFieldDef):
 
     def decodeValue(self, value):
         """Return MemoData instance containing field data."""
-        pprint(self)
-        print(value)
         _block = struct.unpack("<10s", value.strip().zfill(10))[0]
         if _block:
             return self.file.read(_block)

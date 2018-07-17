@@ -13,7 +13,6 @@ __all__ = ["MemoFile", "MemoData"]
 
 import os
 import struct
-from pprint import pprint
 
 class MemoData(str):
 
@@ -130,12 +129,6 @@ class MemoFile(object):
         Return a MemoData object.
 
         """
-        print('name: ' + self.name)
-        print('stream: ' + repr(self.stream))
-        print('is fpt: ' + repr(self.is_fpt))
-        print('blocksize: ' + repr(self.blocksize))
-        print('tail: ' + repr(self.tail))
-        print('blocknum: ' + repr(blocknum))
         self.stream.seek(self.blocksize * long(blocknum))
         if self.is_fpt:
             (_type, _len) = struct.unpack(">LL", self.stream.read(8))
